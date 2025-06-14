@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# This script displays all currently running processes in a user-oriented hierarchical format
+# Bu skript bütün prosesləri istifadəçi yönümlü və iyerarxik şəkildə siyahıya alır
 
-ps -eo user,pid,pcpu,pmem,vsz,rss,tty,stat,start,time,cmd --forest
+ps -axo user,pid,ppid,tty,stat,start,time,cmd --forest
 
