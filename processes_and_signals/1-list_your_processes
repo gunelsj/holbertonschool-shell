@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Bu skript bütün prosesləri istifadəçi yönümlü və iyerarxik şəkildə siyahıya alır
+# Bu skript istifadəçinin proseslərini PID, PPID və digər məlumatlarla hierarxik şəkildə göstərir
 
-ps -axo user,pid,ppid,tty,stat,start,time,cmd --forest
+ps -axo user,pid,ppid,tty,stat,start,time,cmd --forest | head -n 30
 
