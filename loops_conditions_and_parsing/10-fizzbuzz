@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# This script prints numbers from 1 to 100 with FizzBuzz rules
 
-for i in {1..100}
-do
-    if (( i % 15 == 0 )); then
+for i in {1..100}; do
+    if (( i % 3 == 0 && i % 5 == 0 )); then
         echo "FizzBuzz"
     elif (( i % 3 == 0 )); then
         echo "Fizz"
@@ -12,3 +12,4 @@ do
         echo "$i"
     fi
 done
+
