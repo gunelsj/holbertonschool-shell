@@ -1,0 +1,30 @@
+#!/bin/bash
+
+PID_FILE="/var/run/myscript.pid"
+
+# PID faylını yarat
+echo $$ > "$PID_FILE"
+
+# SIGTERM və SIGQUIT üçün handler
+terminate_handler() {
+    echo "I hate the kill command"
+    rm -f "$PID_FILE"
+    exit 0
+}
+
+# SIGINT üçün handler
+int_handler() {
+    echo "Y U no love me?!"
+}
+
+# Siqnalları tənzimləmək
+trap terminate_handler SIGTERM
+trap int_handler SIGINT
+trap terminate_handler SIGQUIT
+
+# Sonsuz dövr
+while true; do
+    echo "To infinity and beyond"
+    sleep 1
+done
+
