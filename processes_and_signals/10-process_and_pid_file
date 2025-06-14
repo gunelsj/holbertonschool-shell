@@ -1,28 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# This script creates a PID file and handles specific signals.
 
 PID_FILE="/var/run/myscript.pid"
-
-# PID faylını yarat
 echo $$ > "$PID_FILE"
 
-# SIGTERM və SIGQUIT üçün handler
-terminate_handler() {
-    echo "I hate the kill command"
-    rm -f "$PID_FILE"
-    exit 0
-}
+# On SIGTERM (kill command)
+trap 'echo "I hate the kill command"; rm -f "$PID_FILE"; exit' SIGTERM
 
-# SIGINT üçün handler
-int_handler() {
-    echo "Y U no love me?!"
-}
+# On SIGINT (Ctrl+C)
+trap 'echo "Y U no love me?!"' SIGINT
 
-# Siqnalları tənzimləmək
-trap terminate_handler SIGTERM
-trap int_handler SIGINT
-trap terminate_handler SIGQUIT
+# On SIGQUIT (Ctrl+\)
+trap 'rm -f "$PID_FILE"; exit' SIGQUIT
 
-# Sonsuz dövr
 while true; do
     echo "To infinity and beyond"
     sleep 1
