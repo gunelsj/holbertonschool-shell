@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
+# Infinite loop writing to a log file every 2 seconds
 
-while true; do
-    echo "I am alive!" >> /tmp/my_process
-    sleep 2
+while true
+do
+  echo "I am alive!" >> /tmp/my_process
+  sleep 2
 done
+

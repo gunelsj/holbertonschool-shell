@@ -1,37 +1,30 @@
 #!/usr/bin/env bash
-
-PID_FILE="/var/run/my_process.pid"
-
-start() {
-    nohup ./manage_my_process > /dev/null 2>&1 &
-    echo $! > "$PID_FILE"
-    echo "manage_my_process started"
-}
-
-stop() {
-    if [ -f "$PID_FILE" ]; then
-        kill "$(cat $PID_FILE)" 2>/dev/null
-        rm -f "$PID_FILE"
-        echo "manage_my_process stopped"
-    else
-        echo "No PID file found. Is the process running?"
-    fi
-}
-
-restart() {
-    stop
-    start
-    echo "manage_my_process restarted"
-}
-
-usage() {
-    echo "Usage: manage_my_process {start|stop|restart}"
-    exit 1
-}
+# Script to manage the background process manage_my_process
 
 case "$1" in
-    start) start ;;
-    stop) stop ;;
-    restart) restart ;;
-    *) usage ;;
+  start)
+    /tmp/manage_my_process &
+    echo $! > /var/run/my_process.pid
+    echo "manage_my_process started"
+    ;;
+  stop)
+    if [ -f /var/run/my_process.pid ]; then
+      kill "$(cat /var/run/my_process.pid)"
+      rm /var/run/my_process.pid
+      echo "manage_my_process stopped"
+    fi
+    ;;
+  restart)
+    if [ -f /var/run/my_process.pid ]; then
+      kill "$(cat /var/run/my_process.pid)"
+      rm /var/run/my_process.pid
+    fi
+    /tmp/manage_my_process &
+    echo $! > /var/run/my_process.pid
+    echo "manage_my_process restarted"
+    ;;
+  *)
+    echo "Usage: manage_my_process {start|stop|restart}"
+    ;;
 esac
+
