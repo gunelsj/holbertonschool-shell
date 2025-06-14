@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# SIGTERM siqnalı gələndə bu mesaj yazılsın
+trap "echo 'I am invincible!!!'" SIGTERM
+
+# Sonsuz döngü ilə hər 2 saniyədən bir mesaj yaz
+while true
+do
+    echo "To infinity and beyond"
+    sleep 2
+done

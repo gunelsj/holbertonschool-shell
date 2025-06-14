@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# 7-highlander skriptini SIGTERM ilə dayandır
+pkill -f 7-highlander
