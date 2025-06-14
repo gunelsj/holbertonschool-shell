@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Apache log faylından IP və HTTP status kodunu çıxaran skript
+
+awk '{ print $1, $9 }' apache-access.log
