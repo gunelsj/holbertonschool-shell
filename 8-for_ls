@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
-# This script lists files and prints part after first dash
+# This script lists files/directories after the first dash
 
 for file in *; do
-  name="${file#*-}"
-  if [ "$name" != "$file" ]; then
-    echo "$name"
-  else
-    echo "$file"
+  if [[ "$file" == *-* ]]; then
+    echo "${file#*-}"
   fi
 done
 
